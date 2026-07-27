@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIANOMAD | 소개</title>
+<style>
+  :root{
+    --black:#111111;
+    --gray-700:#4a4a4a;
+    --gray-500:#8a8a8a;
+    --gray-300:#d9d9d9;
+    --gray-100:#f4f4f4;
+    --white:#ffffff;
+    --accent:#7a5230;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 48px;
+    border-bottom:1px solid var(--gray-300);
+  }
+
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:0.02em;
+  }
+
+  .logo img{width:34px; height:34px; object-fit:contain;}
+
+  nav{
+    display:flex;
+    gap:36px;
+    font-size:14px;
+  }
+
+  nav a{
+    color:var(--black);
+    opacity:0.85;
+  }
+  nav a:hover{opacity:1; text-decoration:underline; text-underline-offset:4px;}
+
+  nav a.active-nav{
+    opacity:1;
+    font-weight:700;
+    text-decoration:underline;
+    text-underline-offset:4px;
+  }
+
+  .cta-btn{
+    background:var(--black);
+    color:var(--white);
+    border:none;
+    padding:10px 18px;
+    font-size:13px;
+    border-radius:6px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:900px;
+    margin:0 auto;
+    padding:56px 48px 24px;
+    text-align:left;
+  }
+
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.15em;
+    color:var(--gray-500);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+
+  h1{
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:14px;
+  }
+
+  .tagline{
+    font-size:15px;
+    color:var(--gray-700);
+    margin-bottom:6px;
+  }
+
+  /* ---------- Content ---------- */
+  .about-content{
+    max-width:900px;
+    margin:0 auto;
+    padding:0 48px 80px;
+  }
+
+  .about-content section{
+    margin-bottom:56px;
+  }
+
+  .about-content h2{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:14px;
+  }
+
+  .about-content p{
+    font-size:14px;
+    color:var(--gray-700);
+    line-height:1.9;
+    margin-bottom:16px;
+  }
+
+  .brand-block{
+    border-left:2px solid var(--accent);
+    padding-left:18px;
+    margin-bottom:20px;
+  }
+
+  .brand-block .tag{
+    font-size:12px;
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:0.05em;
+    margin-bottom:6px;
+  }
+
+  .photo-row{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:12px;
+    margin:32px 0;
+  }
+
+  .photo-row img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:8px;
+  }
+
+  .value-block{
+    margin-bottom:36px;
+  }
+
+  .value-block .value-eyebrow{
+    font-size:12px;
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:0.05em;
+    margin-bottom:4px;
+  }
+
+  .value-block h3{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:10px;
+  }
+
+  .quotes{
+    border-top:1px solid var(--gray-300);
+    border-bottom:1px solid var(--gray-300);
+    padding:32px 0;
+    margin:40px 0;
+  }
+
+  .quote{
+    font-size:14px;
+    color:var(--gray-700);
+    font-style:italic;
+    margin-bottom:10px;
+  }
+
+  .quote span{
+    display:block;
+    font-size:12px;
+    color:var(--gray-500);
+    font-style:normal;
+    margin-top:4px;
+  }
+
+  .closing-photo{
+    width:100%;
+    border-radius:8px;
+    margin-top:20px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--gray-300);
+    padding:44px 48px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+
+  .footer-left .logo{margin-bottom:10px; font-size:15px; gap:8px;}
+  .footer-left .logo img{width:22px; height:22px;}
+  .footer-left p{font-size:11px; color:var(--gray-500); line-height:1.7; max-width:280px;}
+
+  .footer-cols{
+    display:flex;
+    gap:60px;
+  }
+
+  .footer-col h4{
+    font-size:11px;
+    color:var(--gray-500);
+    margin-bottom:12px;
+    letter-spacing:0.05em;
+  }
+
+  .footer-col a{
+    display:block;
+    font-size:12.5px;
+    color:var(--black);
+    margin-bottom:10px;
+  }
+
+  .footer-bottom{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px 48px 40px;
+    font-size:11px;
+    color:var(--gray-500);
+    display:flex;
+    justify-content:space-between;
+  }
+
+  @media (max-width:560px){
+    header, .hero, .about-content, footer{padding-left:20px; padding-right:20px;}
+    .photo-row{grid-template-columns:repeat(2, 1fr);}
+    nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="home.html" class="logo">
+    <img src="logo.png" alt="PIANOMAD 로고">
+    PIANOMAD
+  </a>
+  <nav>
+    <a href="about.html" class="active-nav">ABOUT</a>
+    <a href="concert.html">CONCERT</a>
+    <a href="index.html">ARTIST</a>
+    <a href="photo.html">PHOTO</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <button class="cta-btn">최신 뉴스</button>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">ABOUT · #PIANOMAD</div>
+  <h1>소개</h1>
+  <p class="tagline">자유로운 건반, 함께하는 울림 — 88개의 건반 위의 방랑자</p>
+</section>
+
+<section class="about-content">
+
+  <section>
+    <div class="brand-block">
+      <div class="tag">[ PIANOMAD ]</div>
+      <p>piano와 nomad의 합성어로, '피아노와 함께 자유롭게 살아가는 음악 유목민'을 뜻합니다.</p>
+    </div>
+    <div class="brand-block">
+      <div class="tag">[ NOMAD ]</div>
+      <p>철학자 들뢰즈에 의해 철학적 의미를 부여받은 말로, '특정한 가치와 규범에 얽매이지 않고 끊임없이 자신을 변화시키며 창조적으로 살아가는 존재', 혹은 여러 학문과 지식의 분야를 넘나들며 새로운 앎을 모색하는 인간형을 이르는 말입니다.</p>
+    </div>
+    <p>즉, PIANOMAD는 정형화된 틀이나 기준을 내려놓고, 자신만의 색깔로 피아노와 조우하는 공간입니다. 누구도 중심이 아니고, 모두가 중심인 이 자리에서 우리는 음악을 통해 자신을 꺼내고, 삶을 통해 다시 음악을 만납니다.</p>
+    <p>멈추지 않고 흐르며, 자유롭게 울림을 따라 걷는 사람들 — PIANOMAD입니다.</p>
+  </section>
+
+  <div class="photo-row">
+    <img src="https://lh3.googleusercontent.com/J_1a5xObV1qoSe7qId3vKd01jiBZr808MREJNCWZSullWqe9fi32MYN3T2hBuc5Q4lR672nHBP0TWOCbhNI9zm5yiiya3vbsgC7elEXTs63ttFG_FLliyw=w600-h600-n" alt="PIANOMAD 사진 1">
+    <img src="https://lh3.googleusercontent.com/FARyyBauAvnS0KZRiKyMw36aNoYDAbIM7Jg8sk4-1cNyFwGiqw88_EMtUdP5AUaDf1N96D4Rfga__0sQpF-YqEf2YhCY9GNplD1CKBwI3EjXpUjTYqI=w600-h600-n" alt="PIANOMAD 사진 2">
+    <img src="https://lh3.googleusercontent.com/K2cPdJn7DnicaEAbji6fJurLW8sUMA_LT8psPRcvVm3AdwqtPgkdEe0vC7wBaTg48Ozi4nlpFMXzSAEOpiR5YaRIspbFfBUkdO-rNUwiCwf8TusJP8v7cQ=w600-h600-n" alt="PIANOMAD 사진 3">
+  </div>
+
+  <div class="value-block">
+    <div class="value-eyebrow">#끝없는 흐름</div>
+    <h3>자유</h3>
+    <p>음악은 특정한 장소나 틀에 갇히지 않습니다. 카페의 작은 무대, 낯선 도시의 거리, 오래된 공연장… 어디서든 피아노는 울릴 수 있고, 그 순간마다 새로운 이야기가 시작됩니다. 환경과 소리, 사람과의 우연한 만남이 더해져 연주는 예측할 수 없는 생명력을 얻습니다. 즉흥성과 안정, 흐름과 훈련이 함께 공존하는 공간에서, 전문성과 실력을 갖춘 리더의 세심한 피드백은 자유로운 표현 속에서도 깊이 있는 성장을 가능하게 합니다. 피아노는 멈추지 않고, 우리는 그 흐름 위를 걷습니다.</p>
+  </div>
+
+  <div class="value-block">
+    <div class="value-eyebrow">#내면의 울림</div>
+    <h3>경험</h3>
+    <p>콩쿨의 긴장감, 오디션의 설렘, 무대 위 연주의 집중력, 스튜디오 레코딩의 세밀함, 동료와의 토론과 피드백, 그리고 음악을 깊이 감상하는 시간까지. 경험 많은 지도자가 이끄는 다양한 경험들은 단순한 과정이 아니라 음악과 자신을 끊임없이 단련하고 성장시키는 발판입니다. 다양한 순간 속에서 쌓인 경험은 연주에 풍부한 색채를 더하고, 내면의 깊이를 키우며 자유로운 표현과 기술적 완성도 사이의 균형을 완성합니다.</p>
+  </div>
+
+  <div class="value-block">
+    <div class="value-eyebrow">#함께하는 공명</div>
+    <h3>공유</h3>
+    <p>음악은 고립된 소리가 아니라, 함께 나누는 시간 속에서 진정한 의미를 얻습니다. 각자의 울림이 모여 하나의 큰 파동을 이루듯, 합주와 거리 공연, 감상과 피드백은 개별의 경계를 넘어 서로의 존재를 비추는 거울이 됩니다. 그 안에서 우리는 단순히 음을 맞추는 것을 넘어 서로의 감정을 읽고 이해하며 공명하는 법을 배웁니다. 음악의 진정한 힘은, 혼자가 아닌 '함께'라는 존재 안에서 완성됩니다.</p>
+  </div>
+
+  <div class="quotes">
+    <p class="quote">"음악에서 가장 중요한 것은 악보에 기록되어 있지 않다."<span>─ 말러(Gustav Mahler)</span></p>
+    <p class="quote">"음악은 마음의 소리다."<span>─ 브레히트(Bertolt Brecht)</span></p>
+    <p class="quote">"피아노는 감정을 담는 캔버스다. 거기에 나의 영혼을 그린다."<span>─ 라흐마니노프(Sergei Rachmaninov)</span></p>
+  </div>
+
+  <img class="closing-photo" src="https://lh3.googleusercontent.com/0D4FWxVyTjs_c8WKIcHJRz6UBwz4fGX80HXNk2fnrmrefwWL_orYwu1wwv-1ut67sbZxvhwOG-6mBQFgdiIxdsuMGOEcgYAXw6v2fZpR7o0p0rJ9UEXPHQ=s0" alt="PIANOMAD 클로징 사진">
+
+</section>
+
+<footer>
+  <div class="footer-left">
+    <div class="logo">
+      <img src="logo.png" alt="PIANOMAD 로고">
+      PIANOMAD
+    </div>
+    <p>완성된 연주를 만나는 가장 확실한 방법.<br>피아노마드와 함께 특별한 무대를 완성해보세요.</p>
+  </div>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>PLATFORM</h4>
+      <a href="#">연주자 등록</a>
+      <a href="#">월회비 안내</a>
+      <a href="#">자주하는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>PLATFORM</h4>
+      <a href="#">공연 상담 문의</a>
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+    </div>
+  </div>
+</footer>
+
+<div class="footer-bottom">
+  <span>© 2026 Clefhouse. All rights reserved.</span>
+  <span>사업자등록번호 · 대표자명 · 주소 · 전화번호</span>
+</div>
+
+</body>
+</html>
