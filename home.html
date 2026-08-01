@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIANOMAD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#111111;
+    --gray-700:#4a4a4a;
+    --gray-500:#8a8a8a;
+    --gray-300:#d9d9d9;
+    --gray-100:#f4f4f4;
+    --white:#ffffff;
+    --gold:#b3893f;
+    --gold-light:#d9bd85;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 24px;
+    position:relative;
+  }
+
+  .hero-mark{
+    width:80px;
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:22px;
+  }
+
+  .hero-mark img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  .hero-word{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:72px;
+    letter-spacing:0.04em;
+    color:var(--black);
+    line-height:1;
+  }
+
+  .hero-line{
+    width:64px;
+    height:1px;
+    background:var(--gold);
+    margin:20px auto;
+  }
+
+  .hero-sub{
+    font-size:12px;
+    letter-spacing:0.35em;
+    color:var(--gray-500);
+    margin-bottom:52px;
+  }
+
+  .hero-nav{
+    display:flex;
+    flex-wrap:nowrap;
+    justify-content:center;
+    gap:22px 30px;
+    max-width:none;
+    width:100%;
+    font-size:13.5px;
+    letter-spacing:0.14em;
+    color:var(--gray-700);
+    margin-bottom:64px;
+  }
+
+  .hero-nav a{
+    padding-bottom:4px;
+    border-bottom:1px solid transparent;
+  }
+
+  .hero-nav a:hover{
+    color:var(--black);
+    border-bottom:1px solid var(--gold);
+  }
+
+  .hero-footer{
+    position:absolute;
+    bottom:30px;
+    left:0;
+    right:0;
+    text-align:center;
+  }
+
+  .hero-footer .brand-line{
+    font-size:11px;
+    letter-spacing:0.3em;
+    color:var(--gray-700);
+    margin-bottom:4px;
+  }
+
+  .hero-footer .copy-line{
+    font-size:10px;
+    color:var(--gray-500);
+  }
+
+  @media (max-width:560px){
+    .hero-word{font-size:48px;}
+    .hero-nav{gap:16px 20px; font-size:11px; flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-mark">
+    <img src="logo.png" alt="PIANOMAD 로고">
+  </div>
+  <div class="hero-word">PIANOMAD</div>
+  <div class="hero-line"></div>
+  <div class="hero-sub">PLAY FREEDOM</div>
+
+  <nav class="hero-nav">
+    <a href="about.html">ABOUT</a>
+    <a href="concert.html">PERFORMANCE</a>
+    <a href="index.html">ARTIST</a>
+    <a href="photo.html">PHOTO</a>
+    <a href="notice.html">NOTICE</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+
+  <div class="hero-footer">
+    <div class="brand-line">PIANOMAD</div>
+    <div class="copy-line">© 2026 PIANOMAD. All rights reserved.</div>
+  </div>
+</section>
+
+</body>
+</html>
