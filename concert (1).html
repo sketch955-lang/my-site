@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIANOMAD | 콘서트</title>
+<style>
+  :root{
+    --black:#111111;
+    --gray-700:#4a4a4a;
+    --gray-500:#8a8a8a;
+    --gray-300:#d9d9d9;
+    --gray-100:#f4f4f4;
+    --white:#ffffff;
+    --accent:#b3893f;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 48px;
+    border-bottom:1px solid var(--gray-300);
+  }
+
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:0.02em;
+  }
+
+  .logo img{width:34px; height:34px; object-fit:contain;}
+
+  nav{
+    display:flex;
+    gap:36px;
+    font-size:14px;
+  }
+
+  nav a{
+    color:var(--black);
+    opacity:0.85;
+  }
+  nav a:hover{opacity:1; text-decoration:underline; text-underline-offset:4px;}
+
+  nav a.active-nav{
+    opacity:1;
+    font-weight:700;
+    text-decoration:underline;
+    text-underline-offset:4px;
+  }
+
+  .cta-btn{
+    background:var(--black);
+    color:var(--white);
+    border:none;
+    padding:10px 18px;
+    font-size:13px;
+    border-radius:6px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+
+
+  .hero{
+    max-width:1100px;
+    margin:0 auto;
+    padding:56px 48px 24px;
+    text-align:left;
+  }
+
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.15em;
+    color:var(--gray-500);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+
+  h1{
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:14px;
+  }
+
+  /* ---------- Concert sections ---------- */
+  .concert-section{
+    max-width:1100px;
+    margin:0 auto;
+    padding:8px 48px 48px;
+  }
+
+  .concert-section h2{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:20px;
+    letter-spacing:0.05em;
+  }
+
+  .concert-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:28px 24px;
+    margin-bottom:16px;
+  }
+
+  .concert-card{
+    background:var(--white);
+  }
+
+  .concert-thumb{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    display:block;
+    background:var(--gray-100);
+    border-radius:2px;
+  }
+
+  .concert-info{
+    padding:14px 0 0;
+  }
+
+  .concert-info .concert-num{
+    display:none;
+  }
+
+  .concert-info .concert-title{
+    font-size:14px;
+    font-weight:600;
+    color:var(--black);
+    line-height:1.4;
+    margin-bottom:6px;
+  }
+
+  .concert-info .concert-date{
+    font-size:12px;
+    color:var(--gray-500);
+    margin-bottom:0;
+    letter-spacing:0.01em;
+  }
+
+  .concert-video-btn{
+    display:inline-block;
+    color:var(--accent);
+    font-size:11.5px;
+    margin-top:8px;
+    border-bottom:1px solid transparent;
+  }
+
+  .concert-video-btn:hover{
+    border-bottom:1px solid var(--accent);
+  }
+
+  @media (max-width:960px){
+    .concert-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+
+  /* ---------- Photo slider ---------- */
+  .photo-slider-section{
+    max-width:1100px;
+    margin:0 auto;
+    padding:8px 48px 56px;
+  }
+
+  .photo-slider-section h2{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:20px;
+    letter-spacing:0.05em;
+  }
+
+  .photo-slider{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    padding-bottom:10px;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .photo-slider::-webkit-scrollbar{height:6px;}
+  .photo-slider::-webkit-scrollbar-thumb{background:var(--gray-300); border-radius:3px;}
+
+  .photo-slide{
+    flex:0 0 auto;
+    width:240px;
+    scroll-snap-align:start;
+    cursor:pointer;
+  }
+
+  .photo-slide img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    border-radius:6px;
+    background:var(--gray-100);
+    display:block;
+  }
+
+  .photo-slide-caption{
+    margin-top:8px;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--black);
+  }
+
+  .photo-slide-caption span{
+    display:block;
+    font-size:11px;
+    font-weight:400;
+    color:var(--gray-500);
+    margin-top:2px;
+  }
+
+  .album-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    z-index:300;
+    align-items:flex-start;
+    justify-content:center;
+    padding:40px 16px;
+    overflow-y:auto;
+  }
+
+  .album-modal.open{display:flex;}
+
+  .album-modal-inner{
+    background:var(--white);
+    max-width:600px;
+    width:100%;
+    border-radius:8px;
+    padding:28px 24px 40px;
+    position:relative;
+  }
+
+  .album-modal-close{
+    position:absolute;
+    top:16px;
+    right:18px;
+    background:none;
+    border:none;
+    font-size:24px;
+    cursor:pointer;
+    color:var(--gray-700);
+  }
+
+  #albumModalTitle{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:20px;
+    padding-right:30px;
+  }
+
+  .album-modal-photos{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .album-modal-photos img{
+    width:100%;
+    border-radius:6px;
+    display:block;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--gray-300);
+    padding:44px 48px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+
+  .footer-left .logo{margin-bottom:10px; font-size:15px; gap:8px;}
+  .footer-left .logo img{width:22px; height:22px;}
+  .footer-left p{font-size:11px; color:var(--gray-500); line-height:1.7; max-width:280px;}
+
+  .footer-cols{
+    display:flex;
+    gap:60px;
+  }
+
+  .footer-col h4{
+    font-size:11px;
+    color:var(--gray-500);
+    margin-bottom:12px;
+    letter-spacing:0.05em;
+  }
+
+  .footer-col a{
+    display:block;
+    font-size:12.5px;
+    color:var(--black);
+    margin-bottom:10px;
+  }
+
+  .footer-bottom{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px 48px 40px;
+    font-size:11px;
+    color:var(--gray-500);
+    display:flex;
+    justify-content:space-between;
+  }
+
+  @media (max-width:560px){
+    header, .hero, .concert-section, .photo-slider-section, footer{padding-left:20px; padding-right:20px;}
+    .concert-grid{grid-template-columns:repeat(2, 1fr); gap:16px 12px;}
+    nav{display:none;}
+    header{position:relative; justify-content:flex-end;}
+    .logo{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+    .cta-btn{display:none;}
+  }
+
+  .hamburger{
+    display:none;
+    background:none;
+    border:none;
+    font-size:22px;
+    line-height:1;
+    cursor:pointer;
+    color:var(--black);
+    padding:4px;
+  }
+
+  .mobile-menu{
+    position:fixed;
+    top:0;
+    right:0;
+    width:78%;
+    max-width:320px;
+    height:100vh;
+    background:var(--white);
+    z-index:200;
+    transform:translateX(100%);
+    transition:transform 0.3s ease;
+    box-shadow:-6px 0 24px rgba(0,0,0,0.10);
+    padding:28px 32px;
+    border-left:1px solid var(--gray-300);
+  }
+
+  .mobile-menu.open{
+    transform:translateX(0);
+  }
+
+  .mobile-menu-close{
+    background:none;
+    border:none;
+    font-size:22px;
+    cursor:pointer;
+    color:var(--black);
+    margin-bottom:40px;
+    display:block;
+  }
+
+  .mobile-nav{
+    display:flex;
+    flex-direction:column;
+    gap:34px;
+  }
+
+  .mobile-nav a{
+    font-size:15px;
+    letter-spacing:0.04em;
+    color:var(--gray-700);
+  }
+
+  .mobile-nav a.active-nav{
+    color:var(--black);
+    font-weight:700;
+  }
+
+  @media (max-width:560px){
+    .hamburger{display:block;}
+  }
+
+  .poster-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    z-index:300;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .poster-modal.open{
+    display:flex;
+  }
+
+  .poster-modal img{
+    max-width:90vw;
+    max-height:90vh;
+    border-radius:6px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="home.html" class="logo">
+    <img src="logo.png" alt="PIANOMAD 로고">
+    PIANOMAD
+  </a>
+  <nav>
+    <a href="about.html">ABOUT</a>
+    <a href="concert.html" class="active-nav">PERFORMANCE</a>
+    <a href="index.html">ARTIST</a>
+    <a href="notice.html">NOTICE</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+  <button class="cta-btn" onclick="togglePosterModal()">최신 뉴스</button>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="메뉴 열기">&#9776;</button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="메뉴 닫기">&times;</button>
+  <nav class="mobile-nav">
+    <a href="about.html">ABOUT</a>
+    <a href="concert.html" class="active-nav">PERFORMANCE</a>
+    <a href="index.html">ARTIST</a>
+    <a href="notice.html">NOTICE</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+</div>
+
+<div class="poster-modal" id="posterModal" onclick="togglePosterModal()">
+  <img src="poster.png" alt="제3회 피아노마드 연주회 포스터" onclick="event.stopPropagation()">
+</div>
+
+<section class="hero">
+  <div class="eyebrow">PERFORMANCE</div>
+  <h1>콘서트</h1>
+</section>
+
+<section class="concert-section">
+  <h2>정 기 연 주 회</h2>
+  <div class="concert-grid">
+    <div class="concert-card">
+      <img class="concert-thumb" src="https://lh3.googleusercontent.com/IUHv4GrB0Xsw8XYlroqA5qOY-_RkBMbak2M3iTMAMYNvdvGcOgKObsDHMwZBlaz_kWbqkRxtXfS6Y4_urDt0wix3ZjIZw_OHD73lo5kXn53q3YH7-tNN=w800" alt="제 1회 피아노마드 연주회 - 師弟同行 / 사제동행">
+      <div class="concert-info">
+        <div class="concert-num">001</div>
+        <div class="concert-date">2025. 11. 8</div>
+        <div class="concert-title">師弟同行 / 사제동행</div>
+        <a class="concert-video-btn" href="https://youtube.com/playlist?list=PLQf6iZW7Pr6rP4O5vwOZ28ggnebaU1x7Y&si=IeKXNRYqlM7Mv9qB" target="_blank">연주 영상</a>
+      </div>
+    </div>
+    <div class="concert-card">
+      <img class="concert-thumb" src="https://lh3.googleusercontent.com/ZQXr6Ey0xDsr3IjqJoOavf7edWpROot0ZvSrqKEvgnJROre7VOo-264qwQKTd8XCi2_sfXsDNIi5CiOZtyhzWJkfEHR4mzNXlW3c2fFFekcFM60GOWb8Ig=w800" alt="제 2회 피아노마드 연주회 - 공감각">
+      <div class="concert-info">
+        <div class="concert-num">002</div>
+        <div class="concert-date">2026. 4. 11</div>
+        <div class="concert-title">공감각</div>
+        <a class="concert-video-btn" href="https://youtube.com/playlist?list=PLGELE95-GgfTq_JWG-ljwv23ElKDSv0lK&si=NHw9I_MM7WjDHo1Y" target="_blank">연주 영상</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="concert-section">
+  <h2>예 술 활 동</h2>
+  <div class="concert-grid">
+    <div class="concert-card">
+      <img class="concert-thumb" src="https://lh3.googleusercontent.com/WexRBnXUOuOdwAc0MVFCzgBFrePtkwjh_IcCvSKcWmMBCCsPN_H06E8Bhw27Qqv_GconYLCXZD-gYfrlA5tQeR7jISJB-LvmoPzM5ytC1pfZuORz3bZA1vc=w800" alt="크리스마스 레코딩릴레이">
+      <div class="concert-info">
+        <div class="concert-num">001</div>
+        <div class="concert-date">2025. 12. 18</div>
+        <div class="concert-title">크리스마스 레코딩릴레이</div>
+      </div>
+    </div>
+    <div class="concert-card">
+      <img class="concert-thumb" src="https://lh3.googleusercontent.com/yFtdy9AmFptPSGpNqCViMq8cp1-3MHmckyNV5PK1RvRBSxSNZ3RQ2X7pjVAb-ez4bTazdofm_SL84NB2XkLv4qcC2WbuRV7zLNPAa6_qJdyDpxa2egx44w=w800" alt="겨울왕국 레코딩릴레이">
+      <div class="concert-info">
+        <div class="concert-num">002</div>
+        <div class="concert-date">2025. 12. 20</div>
+        <div class="concert-title">겨울왕국 레코딩릴레이</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="photo-slider-section">
+  <h2>PHOTO</h2>
+  <div class="photo-slider">
+    <div class="photo-slide" onclick="openAlbum('a1')">
+      <img src="https://lh3.googleusercontent.com/tZhh5MEs5-lDn8vRA0tzgHy1ltIOflGHGoMsQYphAosOZeQ0gFAk4B05rA2yhQ_x5g6UEWavqKPeDltmz-ozD1f5BJrqb25VsPUifBpUjNM4c2xHPc_q=w800" alt="師弟同行 / 사제동행" referrerpolicy="no-referrer">
+      <div class="photo-slide-caption">師弟同行 / 사제동행<span>2025. 11. 08</span></div>
+    </div>
+    <div class="photo-slide" onclick="openAlbum('a2')">
+      <img src="https://lh3.googleusercontent.com/jmT6CWTRdAcpEBkDO3gn_AC-4AChpywfQ5krIf8SQWJq51lcW9g270BF1HTByUddCvzprE9DG72sxdO8cR9Cp8eZXa1tcOOPJg1FT1zPFZwCsY7Pom0SUw=w800" alt="공감각" referrerpolicy="no-referrer">
+      <div class="photo-slide-caption">공감각<span>2026. 04. 11</span></div>
+    </div>
+    <div class="photo-slide" onclick="openAlbum('a3')">
+      <img src="https://lh3.googleusercontent.com/0jy9RB5IA5m4EyGjnq5X-2KEoCURZyeBZzagF9KtcOQn2_6ZUf0HGo9xWt9J5_vFsRVSfpJp_G7cYSIJwg62RMgMv9TlwGbK2hO5W4GptnZdromz7rbii9s=w800" alt="제 2회 정기모임" referrerpolicy="no-referrer">
+      <div class="photo-slide-caption">제 2회 정기모임<span>2026. 01. 24</span></div>
+    </div>
+    <div class="photo-slide" onclick="openAlbum('a4')">
+      <img src="https://lh3.googleusercontent.com/iwhanW19GNt8dPMw6WTT6R6nGWlkK0J982uG7cJ2JpLd5owSU6f_WWhP2BPD12SFTvJGiw5g946rHf9k9X7YXq2FnIZVz3fmoehEkeg_oRzwkcIc9Kmb=w800" alt="치맥파티" referrerpolicy="no-referrer">
+      <div class="photo-slide-caption">치맥파티<span>2026. 03. 07</span></div>
+    </div>
+    <div class="photo-slide" onclick="openAlbum('a5')">
+      <img src="https://lh3.googleusercontent.com/C9Uk79EZGV9dIj-oLdQU-HxG0uwDLfPSqHRyO1hnIVRqx2kcQZ_93R3P7uWH58rhAjJr1RS0qbxfJNhIvlnCwNs1OI3YvNxpr9vrXmDY8z9IA0697ScIoQ=w800" alt="김세연님 버스킹 연주회" referrerpolicy="no-referrer">
+      <div class="photo-slide-caption">김세연님 버스킹 연주회<span>2025. 10. 19</span></div>
+    </div>
+    <div class="photo-slide" onclick="openAlbum('a6')">
+      <img src="https://lh3.googleusercontent.com/FrEhJ58HOCQ9aMkohI2Mfo_vNK4ktl2SC5XX_7VVCFWZpXJ6HftBleqxSTKumFIkFR-RhwQDp8ysdhJNrY_jVYBZGFgL99AV5jwekLvpdZUEXPWVpS74sg=w800" alt="박신희님 수상자 연주회" referrerpolicy="no-referrer">
+      <div class="photo-slide-caption">박신희님 수상자 연주회<span>2026. 01. 31</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="album-modal" id="albumModal" onclick="closeAlbum(event)">
+  <div class="album-modal-inner">
+    <button class="album-modal-close" onclick="closeAlbum(event)">&times;</button>
+    <h3 id="albumModalTitle"></h3>
+    <div id="albumModalPhotos" class="album-modal-photos"></div>
+  </div>
+</div>
+
+
+<footer>
+  <div class="footer-left">
+    <div class="logo">
+      <img src="logo.png" alt="PIANOMAD 로고">
+      PIANOMAD
+    </div>
+    <p>완성된 연주를 만나는 가장 확실한 방법.<br>피아노마드와 함께 특별한 무대를 완성해보세요.</p>
+  </div>
+  <div class="footer-cols">
+    <div class="footer-col">
+      <h4>PLATFORM</h4>
+      <a href="#">연주자 등록</a>
+      <a href="#">월회비 안내</a>
+      <a href="#">자주하는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h4>PLATFORM</h4>
+      <a href="#">공연 상담 문의</a>
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+    </div>
+  </div>
+</footer>
+
+<div class="footer-bottom">
+  <span>© 2026 PIANOMAD. All rights reserved.</span>
+  <span>사업자등록번호 · 대표자명 · 주소 · 전화번호</span>
+</div>
+
+
+<script>
+  function toggleMobileMenu(){
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+</script>
+
+<script>
+  function togglePosterModal(){
+    document.getElementById('posterModal').classList.toggle('open');
+  }
+</script>
+
+<script>
+  var albumData = {
+    a1: {
+      title: "師弟同行 / 사제동행",
+      photos: [
+        "https://lh3.googleusercontent.com/yaEAnKV2wUNudjY2Npq3S-u517LanUJZEhyOwAwGtFQCxBodVaPLL2RVwfn-pPyzLrH2zvv342TWsnI_VA0lZ_uX9QOkU6nyd2Iwdzirm9TUXGlik8t3=w800",
+        "https://lh3.googleusercontent.com/5v13DPfAQas3xjFXWBO_MMgwJcky3mYHnXooL6XVZqRysvAtpzEkmsRRdDrpE_4rTNDOAP8N73c53gEukDzNuhyIRGNduzJdicvYGGxDXoR3YFDyEtNQ=w800",
+        "https://lh3.googleusercontent.com/1H6WHFVagUqYPDQGMvb0qyWfRfXZabP0hWCwZ13xWYM6_AWM5iOYKc580CVkr74IdvCRfRBlhH71jsSK6VRp7B_1qHAIdEuIJCF61mpJchunCGN37yuJXoo=w800",
+        "https://lh3.googleusercontent.com/c7fLjn0kcSzHZn0niWx3ggEThPn_T2sc7-oXKbL-snDCQAi7JYuVy07fBqGcVNHFuG81qhGFGadriNoafDL4Sgj5V-CwmvqI9aR2K-7CzajMePLpTRZWFn0=w800",
+        "https://lh3.googleusercontent.com/qF-G0Cn1v3Z8iTtbTNRSURMFggVc4ad0YzMFXz_NJpG7d1hHc9yUrLlOvAoOetOT_qxU9RMv7R15c5pZQck2rOaVCwGSihE0x3GewZbByp1AhkrGxYUtSJ0=w800",
+        "https://lh3.googleusercontent.com/Bfh2xraBv-Nqtxt7eysBkOjoteQY4DAePSwTPXQ1B2IRg3wPMzVG0rEIG1psU3FQejWkH3e0AwMkdl_7aG1wREqyzPJm4CnUPGWzqOh2X8Q6VSyklGnQgLM=s0"
+      ]
+    },
+    a2: {
+      title: "공감각",
+      photos: [
+        "https://lh3.googleusercontent.com/SYIK2q-luutNxTwMN2SAri-fNxsDiiVJVaw6Owia-SOw5zAoDOqm1pZDREUWoEHGjqV5c2lnyNNhK2OqwjiWW60wztWWCW6zm99iBttzDTKGNjdHDIsC_w=s0",
+        "https://lh3.googleusercontent.com/eiyIzA3uIN22ZoWHLkcdMmp_TRL6oCVCTIag1KsFXzJOlwZvVQP3OQixTdaBvA64nlvKL7YtgGdR5-ZTp93UwvUmGrElRBhqiB9MXv56dMbvXKx8X6MccA=w1920-h2558-n",
+        "https://lh3.googleusercontent.com/UJzxKejSu6RTkAzh28wGeipBEQqzEm7GkJ9fb2Hc4nBOCI_KOv3CxVxOIQ2bWifDBR1vD5Mccq3B7ArHcbHClfTyIrXINrhy1JBp_AK4DBjquHgPScja=w1920-h2558-n",
+        "https://lh3.googleusercontent.com/VsFIF_6T0tynTmMnMm0RQF7GpT5HBXNXiXf75xRxnwQZ_VavCoQLiKiH_ADhOhh2B7WcAgw9tv5aDfiW07A_xV-MjFyjWT697fwxnhPcpe-s3ISb1CXz=w1920-h2558-n",
+        "https://lh3.googleusercontent.com/Gkh_1BGlEnbMt4iBnxCuI9EJ-A0j63uNene0EZ9-Q2XkG6FVilUEb1CIvAxk8XCtlTtgxEomFecEHB91_wmp5-HVYT-J0qZES_kwXOLpsLIAelf_fzZgik0=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/Z65_zcTaX8kFPovuXA6HpoXpEzaBZFqPBRIDp-npIAtTeAIJOLHj9HUliIKUm0S74XCbBq2vVjKzUMLzl1YN3CVeifS5UDoWCQ0iDvxH6Vs-iJHWEBSRFQ=w1920-h2558-n",
+        "https://lh3.googleusercontent.com/Z5poZGHH6j4Trt-q3k6LRes_zQdGn4GAMBakdD076VRbCThwDdNQjTyZgav6cef9-AboUpxMUBFJbCLHVfzmvFOGi4X-6rE59FEN8nYf_E1lW5MZi8wKE48=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/qsbim_KQwWJ2opm_jr3ObnKFhilAvHRzVf2um35gs1Y4YjT0nmQHjPdVfUuvCp9W8L1x7cfnGw6bm1BKMQz4X7rLF7K44PE_8hrrMxK6bvqjcIG7L31xWEs=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/3ITEbb9xlR8GwMTfWR5PU0JAeql68qOo3OdSIGakZHdoXIjdmX1wQCd5fgRA4uCz5wgEbMr1jrlBD2FukM4g09VDFZ_I3_q14m5ch6y8yz8yqUsI5R_BJQ=w1920-h2558-n",
+        "https://lh3.googleusercontent.com/zEyu7pewwWS3A8i1FxMxP3tTC9DnR9i7zXuSKVm7qhm-jeeESLgY8hZba3nFhWT0BKxRALAjn0eWJIe4S6PZl5VzlObng_WUj1R9g3VLhyuwNsdx7xZ2Fg=s0",
+        "https://lh3.googleusercontent.com/x91hbid4ouNxTXu6h721Tq5yTEtqNv9q-3TlicHZkjyI09sP4xJ5KPy-uXuAhw8vSggdljfTsgpn5FbThS1p9cGUCvwLgdiS7Qrc5avUS1qSv8pLwVhl9_0=w1920-h2558-n",
+        "https://lh3.googleusercontent.com/oFOmItTdsZx_WPSX1Oc3rFTN9A2fQ5fkDWeLLv7BMUDJfq8Oshn4xk2_h1Tii7c5xsjYiI6WFXHTdR8mivNrHvqQkSpnEG-4rnqfSrMuvp2tiqkGfmpuSg=w1920-h2558-n",
+        "https://lh3.googleusercontent.com/0iEHqg8h9ed5tO44VMTEgR9suVvdjhtt5u4Y8qVfCDJlLqfsxUDJaU8P6OqOdiEptkEOuC1-0CGhpfceJaszNtHbrrI4bFa9QI_-V78D4HrjVaev6Eu6=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/6VeerjqT-rMjmzczjD7PVcBa88RGDSlHEQeuyiwZSN-6uOp1WqRHf3zrY0kHpXVvLR7Y2xClvqHmuBqxeNcFK3zWkliy1xAceaCVOm3TDhFl6cOO6urY=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/zl_kuzdhsl-JcTsCDFT2R-OUzH-K036VuOa8y4onZ1jhZUjyTpCYpfrcmEXAEA4n9Xf3ntkf5wT2-rIO19ifBRmAjV1y_yCe7gbzR5ef7zeRFKrCNX4=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/RDV6MgIqsszwf0puUYMjxkyT98pX2cwqzJ1Zb2Uf3NXfZqgHMxoKS1nPKPpirXWF8BVM2RNXDWcQVcqSAKNeiHG993GaOp4jIlNamgrBqBqzeECJe7BSHHY=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/sOJFGHDXreuOkfq_PwbLfWkOCGls1kufHmMAKJ55FOV21y9kN2nSqZnQ0yhXTQhywj47H5OzRloHaCwJZ5pDVunQnKlwVIPuuIFcdEGeMsGewqjiXp10PA=w1920-h2558-n",
+        "https://lh3.googleusercontent.com/fy-VOFPsGDYUijJMkd5H39hxZ1hW80HqGbnxYD7xMtzUQagE4jie4C0oE37yvqilPLGwRO-PujbNFao3KL8fuldMK_HhBIMZMOONEJmDPU16NOHIGKADmw=s0",
+        "https://lh3.googleusercontent.com/bwNEo_Ahqbh49nUO7MUPEM5KG15d4gROD0TbMTZg3YqnupiCSYOQz4D4rglChOvNAwd12IvxiLyn0wrHeK22j9h2JlRacklgmTlhJxH4mJ7WTyIYddj58g=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/jmT6CWTRdAcpEBkDO3gn_AC-4AChpywfQ5krIf8SQWJq51lcW9g270BF1HTByUddCvzprE9DG72sxdO8cR9Cp8eZXa1tcOOPJg1FT1zPFZwCsY7Pom0SUw=w1920-h1442-n",
+        "https://lh3.googleusercontent.com/VpMgeyreIKAgNqU_9teRPjvi8SDQofodWZ5lRFncztpvtH9EEv1jioP33KkMC-aYE8SqY6N48Z_mkGKkl_F26poZvbUI0Ih6-7OKlpeUk4LHH2elqqm2hA=s0"
+      ]
+    },
+    a3: {
+      title: "제 2회 정기모임",
+      photos: [
+        "https://lh3.googleusercontent.com/C_ENVnjc8tz_vW0AX6wUGZDjMsI9l9Jf0Z-DYk9zAjDHxChmT0bXr6IGtO3VFBxQ_g6xt2QyfFKBaLnc6HmAHmqBybAHTpU4LXARaPyo8Ssbsrs5CjJl-A=s0",
+        "https://lh3.googleusercontent.com/Jm51XNCHfWdV3ynuRuTy_jii0HWfoCCY0j_4wWv5VQGNYAX_EMjjdaJU3vUrZXCTRBsWJExDCvjt-lADhDz8_7y3_BFbsSbR4QnPurPz07THjhV4XHD7MY8=s0"
+      ]
+    },
+    a4: {
+      title: "치맥파티",
+      photos: [
+        "https://lh3.googleusercontent.com/FWOcwdK_Pfqohmhl2mbXmAqVbWz3kHsf9W4pfPr3i8sx5pF49bvE1rapZh13gUXDPN6daQCzTcT84nOv7sMtQAd6Wuu-uiCalNCiWmdJCqWjA9xpE9CuzA=s0",
+        "https://lh3.googleusercontent.com/sWJo8m609IQtBrpvxeb5AgxxByCWbYC5iVo5E-zD8pJwR_peO4-l7C7P9moABGeNg9Vgw4LzDyVmt8-vE2gR3KqR6aLtdK0CpVgQpaf2vY8aO12WeD9ycg4=w1920-h2560-n"
+      ]
+    },
+    a5: {
+      title: "김세연님 버스킹 연주회",
+      photos: [
+        "https://lh3.googleusercontent.com/8nIxdR1TcMgAaLNnP9Dn2T0FXQA7xJtqojLr32HkjJTysOXYFITKDE2jGwTHYpRHF047CV4XaZNOGE6CXztnIhuRxUTHLKj3isdjDqwqhwv2-Wt5rj-GCFQ=s0",
+        "https://lh3.googleusercontent.com/PVovBpWucpVPcgJTU3CzePiZjK2j05jKBnfEEBGMf7EbpgWSoo0Nh4w0LAggsbLZRGrNIHG_IdmxAzywVbTYIWncZM-FX31reR0gUnYP-M_7zLEdNmVdSw=s0"
+      ]
+    },
+    a6: {
+      title: "박신희님 수상자 연주회",
+      photos: [
+        "https://lh3.googleusercontent.com/w8VzzKGodGq58rk7gZcQ5G2ABkEtSamD1V3vqhKFvqzDvM0LFVNFHy1153ydFo8plzsg2JA7Ze5J3UiYmdHckD_yhJD0PuSsIGBn3jVJX4-NGh6jQTrLDQ=s0",
+        "https://lh3.googleusercontent.com/AkRR7IDTkH0SVG6IQrfdFhtd8-zD4f3u-FIj5kF-lvxgBcXuYo-O2jYRDPa2NelnlUYsUAUYAz59Xn8RsBixhl5-UBqj-ee7mTjjFi8kEBY7UI33nH1z=s0"
+      ]
+    }
+  };
+
+  function openAlbum(id){
+    var data = albumData[id];
+    if(!data) return;
+    document.getElementById('albumModalTitle').textContent = data.title;
+    var container = document.getElementById('albumModalPhotos');
+    container.innerHTML = '';
+    data.photos.forEach(function(src){
+      var img = document.createElement('img');
+      img.src = src;
+      img.referrerPolicy = 'no-referrer';
+      img.alt = data.title;
+      container.appendChild(img);
+    });
+    document.getElementById('albumModal').classList.add('open');
+  }
+
+  function closeAlbum(e){
+    if(e.target.id === 'albumModal' || e.target.classList.contains('album-modal-close')){
+      document.getElementById('albumModal').classList.remove('open');
+    }
+  }
+</script>
+</body>
+</html>
